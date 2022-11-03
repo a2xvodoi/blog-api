@@ -42,7 +42,13 @@ const AuthController = {
             });
             user.token = token;
             await user.save();
-            const response = dataResponse(user, ["user_name", "email", "first_name", "last_name", "token"]);
+            const response = dataResponse(user, [
+                "user_name",
+                "email",
+                "first_name",
+                "last_name",
+                "token",
+            ]);
             res.send(
                 responseSuccess("Đăng ký tài khoản thành công!", response)
             );
@@ -64,35 +70,45 @@ const AuthController = {
                 responseFailure("", { errors: error.details[0].message })
             );
 
-        const user = await Users.findOne({
-            where: {
-                email: req.body.email,
-            },
-        });
-        if (!user)
-            return res.send(
-                responseFailure("", {
-                    errors: "Email or Password is not correct",
-                })
+        try {
+            const user = await Users.findOne({
+                where: {
+                    email: req.body.email,
+                },
+            });
+            if (!user)
+                return res.send(
+                    responseFailure("", {
+                        errors: "Email or Password is not correct",
+                    })
+                );
+
+            const isCorrectPassword = bcrypt.compare(
+                req.body.password,
+                user.password
             );
 
-        const isCorrectPassword = bcrypt.compare(
-            req.body.password,
-            user.password
-        );
+            if (!isCorrectPassword)
+                return res.send(
+                    responseFailure("", { errors: "Password is not correct" })
+                );
 
-        if (!isCorrectPassword)
-            return res.send(
-                responseFailure("", { errors: "Password is not correct" })
-            );
-
-        const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, {
-            expiresIn: 60 * 60 * 2,
-        });
-        user.token = token;
-        await user.save();
-        const response = dataResponse(user, ["user_name", "email", "first_name", "last_name", "token"]);
-        res.send(responseSuccess("Đăng nhập thành công!", response));
+            const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, {
+                expiresIn: 60 * 60 * 2,
+            });
+            user.token = token;
+            await user.save();
+            const response = dataResponse(user, [
+                "user_name",
+                "email",
+                "first_name",
+                "last_name",
+                "token",
+            ]);
+            res.send(responseSuccess("Đăng nhập thành công!", response));
+        } catch (error) {
+            return res.send(responseFailure("", error));
+        }
     },
 
     async logout(req, res) {
@@ -114,7 +130,6 @@ const AuthController = {
             }
             return res.send(responseSuccess("Đăng xuất thành công!"));
         } catch (error) {
-            console.log(error);
             return res.send(
                 responseFailure("Đăng xuất thất bại! Đã có lỗi xảy ra!", {
                     errors: error,

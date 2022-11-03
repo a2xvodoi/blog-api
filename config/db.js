@@ -1,18 +1,12 @@
 import Sequelize from "sequelize";
-import configJson from "./json/config.json";
 
-const env = process.env.NODE_ENV || "development";
-const config = configJson[env];
 const useENV = {
-    database: process.env.DATABASE,
-    username: process.env.USER_NAME,
-    password: process.env.PASSWORD,
-    host: process.env.HOST,
-    dialect: process.env.DIALECT,
+    database: process.env.DATABASE_NAME,
+    username: process.env.DATABASE_USER_NAME,
+    password: process.env.DATABASE_PASSWORD,
+    host: process.env.DATABASE_HOST,
+    dialect: process.env.DATABASE_DIALECT,
     timezone: "+07:00",
-    query: {
-        raw: true,
-    },
     dialectOptions: {
         ssl: {
             require: true,
@@ -21,21 +15,25 @@ const useENV = {
     },
 };
 
-if (process.env.host) {
+// if (process.env.host) {
     var options = {
         database: useENV.database,
         username: useENV.username,
         password: useENV.password,
         ...useENV,
     };
-} else {
-    var options = {
-        database: config.database,
-        username: config.username,
-        password: config.password,
-        ...config,
-    };
-}
+// }
+// else {
+//     const env = process.env.NODE_ENV || "development";
+//     const configJson = await import("./json/config.json");
+//     const config = configJson.default[env];
+//     var options = {
+//         database: config.database,
+//         username: config.username,
+//         password: config.password,
+//         ...config,
+//     };
+// }
 export const sequelize = new Sequelize(
     options.database,
     options.username,

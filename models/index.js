@@ -11,7 +11,8 @@ sequelize
     .then(() => {
         console.log("connect db success!");
     })
-    .catch(() => {
+    .catch((error) => {
+        console.error(error);
         console.log("connect db fail!");
     });
 
@@ -19,6 +20,7 @@ const baseOption = {
     timestamps: true,
     freezeTableName: true,
     underscored: true,
+    paranoid: true,
 };
 
 // Define all models

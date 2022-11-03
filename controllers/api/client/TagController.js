@@ -14,6 +14,7 @@ const TagController = {
             const response = dataMapResponse(tags, [
                 "id",
                 "name",
+                "slug",
                 "image",
                 "describe",
                 "interested",

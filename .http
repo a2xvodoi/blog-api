@@ -62,3 +62,70 @@ content-type: application/json
     "email": "eve.holt@reqres.in",
     "password": "cityslicka"
 }
+
+
+### Tag store
+POST   http://localhost:3000/api/admin/tags
+content-type: application/json
+
+{
+    "title": "cityslicka ios 333",
+    "describe": "cityslicka ios"
+}
+
+### Tag update
+PUT   http://localhost:3000/api/admin/tags/3
+content-type: application/json
+
+{
+    "title": "cityslicka ios111",
+    "describe": "cityslicka ios"
+}
+
+### Tag delete
+DELETE    http://localhost:3000/api/admin/tags/3
+content-type: application/json
+
+
+### Tag restore
+GET     http://localhost:3000/api/admin/tags/3/restore
+content-type: application/json
+
+
+### Blog list
+GET   http://localhost:3000/api/admin/blogs
+content-type: application/json
+
+
+### Blog store
+POST   http://localhost:3000/api/admin/blogs
+content-type: application/json
+
+{
+    "title": "cityslicka ios 9993",
+    "summary": "cityslicka ios",
+    "content": "cityslicka ios",
+    "tags": "1, 4",
+    "published": 1
+}
+
+
+### Blog update
+PUT   http://localhost:3000/api/admin/blogs/9
+content-type: application/json
+
+{
+    "title": "cityslicka ios 555",
+    "summary": "cityslicka ios",
+    "content": "cityslicka ios",
+    "tags": "1"
+}
+
+
+### Blog delete
+DELETE    http://localhost:3000/api/admin/blogs/9
+content-type: application/json
+
+### Blog restore
+GET     http://localhost:3000/api/admin/blogs/9/restore
+content-type: application/json

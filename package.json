@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node --es-module-specifier-resolution=node ./bin/www.js",
-    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect ./bin/www.js"
+    "dev": "nodemon --experimental-modules --experimental-json-modules --es-module-specifier-resolution=node --inspect ./bin/www.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

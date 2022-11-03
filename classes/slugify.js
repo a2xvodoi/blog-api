@@ -13,6 +13,6 @@ export default function (text) {
             .replace(/\-\-+/g, "-") // Replace multiple - with single -
             .replace(/\-$/g, "") +
         "-" +
-        shortid.generate
+        shortid.generate()
     );
 }
