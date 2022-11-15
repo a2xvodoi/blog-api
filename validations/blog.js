@@ -10,8 +10,8 @@ const convertStringToArray = (value, helpers) => {
 
 export const blogValidator = (data) => {
     const rule = Joi.object({
-        title: Joi.string().min(6).max(225).required(),
-        summary: Joi.string(),
+        title: Joi.string().min(6).max(50).required(),
+        summary: Joi.string().max(100),
         content: Joi.string().required(),
         published: Joi.boolean(),
         parent_id: Joi.number(),

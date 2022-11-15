@@ -1,7 +1,6 @@
 import { Tags, Blogs } from "../../../models";
 import {
     dataMapResponse,
-    dataResponse,
     responseFailure,
     responseSuccess,
 } from "../../../classes/response";
@@ -38,31 +37,7 @@ const TagController = {
                     },
                 },
             });
-            const response = {
-                tag: dataResponse(blogs[0].tags[0], [
-                    "id",
-                    "title",
-                    "slug",
-                    "image",
-                    "describe",
-                    "follow",
-                    "parent_id",
-                ]),
-                blogs: dataMapResponse(blogs, [
-                    "id",
-                    "title",
-                    "slug",
-                    "viewed",
-                    "image",
-                    "summary",
-                    "content",
-                    "published",
-                    "parent_id",
-                    "author_id",
-                    "published_at",
-                ]),
-            };
-            return res.send(responseSuccess("", response));
+            return res.send(responseSuccess("", blogs));
         } catch (error) {
             return res.send(responseFailure("", error));
         }

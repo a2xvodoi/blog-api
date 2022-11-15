@@ -7,7 +7,7 @@ export default {
         autoIncrement: true,
     },
     title: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         allowNull: false,
         unique: true,
     },
@@ -24,10 +24,10 @@ export default {
         type: Sequelize.STRING,
     },
     summary: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
     },
     content: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
     },
     published: {
         type: Sequelize.SMALLINT,
