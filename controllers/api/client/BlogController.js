@@ -7,7 +7,7 @@ import {
 } from "../../../classes/response";
 import constants from "../../../config/constants";
 
-const TagController = {
+const BlogController = {
     async show(req, res) {
         try {
             const blog = await Blogs.findOne({
@@ -52,4 +52,4 @@ const TagController = {
     },
 };
 
-export default TagController;
+export default BlogController;

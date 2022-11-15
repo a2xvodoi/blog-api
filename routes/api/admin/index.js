@@ -10,6 +10,7 @@ router.get("/", function (req, res, next) {
 });
 
 //Tag
+router.get("/tags/:id", TagController.show);
 router.post("/tags", TagController.store);
 router.put("/tags/:id", TagController.update);
 router.delete("/tags/:id", TagController.destroy);
@@ -17,6 +18,7 @@ router.get("/tags/:id/restore", TagController.restore);
 
 //Blog
 router.get("/blogs", BlogController.list);
+router.get("/blogs/:id", BlogController.show);
 router.post("/blogs", BlogController.store);
 router.put("/blogs/:id", BlogController.update);
 router.delete("/blogs/:id", BlogController.destroy);

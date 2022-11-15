@@ -13,7 +13,7 @@ export const blogValidator = (data) => {
         title: Joi.string().min(6).max(225).required(),
         summary: Joi.string(),
         content: Joi.string().required(),
-        published: Joi.number(),
+        published: Joi.boolean(),
         parent_id: Joi.number(),
         tags: Joi.string().custom(convertStringToArray, "convert field"),
     });

@@ -4,11 +4,23 @@ import { responseFailure, responseSuccess } from "../../../classes/response";
 import slugify from "../../../classes/slugify";
 
 const TagController = {
+    async show(req, res) {
+        try {
+            const tag = await Tags.findOne({
+                where: {
+                    id: req.params.id,
+                },
+            });
+            return res.send(responseSuccess("", tag));
+        } catch (err) {
+            return res.send(responseFailure("", { errors: err.message }));
+        }
+    },
     async store(req, res) {
         const { error } = tagValidator(req.body);
-        if (error) throw new Error(error.details[0].message);
-
+        
         try {
+            if (error) throw new Error(error.details[0].message);
             const existTag = await Tags.findOne({
                 where: {
                     title: req.body.title,
@@ -35,9 +47,9 @@ const TagController = {
     },
     async update(req, res) {
         const { error } = tagValidator(req.body);
-        if (error) throw new Error(error.details[0].message);
-
+        
         try {
+            if (error) throw new Error(error.details[0].message);
             const tag = await Tags.findOne({
                 where: {
                     id: req.params.id,

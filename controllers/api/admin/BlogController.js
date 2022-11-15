@@ -18,12 +18,27 @@ const BlogController = {
             return res.send(responseFailure("", { errors: error.message }));
         }
     },
+    async show(req, res) {
+        try {
+            const blog = await Blogs.findOne({
+                where: {
+                    id: req.params.id,
+                },
+                include: {
+                    model: Tags,
+                },
+            });
+            return res.send(responseSuccess("", blog));
+        } catch (err) {
+            return res.send(responseFailure("", { errors: err.message }));
+        }
+    },
     async store(req, res) {
         const { error } = blogValidator(req.body);
-        if (error) throw new Error(error.details[0].message);
-
+        
         const t = await sequelize.transaction();
         try {
+            if (error) throw new Error(error.details[0].message);
             const existBlog = await Blogs.findOne({
                 where: {
                     title: req.body.title,
@@ -70,10 +85,10 @@ const BlogController = {
     },
     async update(req, res) {
         const { error } = blogValidator(req.body);
-        if (error) throw new Error(error.details[0].message);
-
+        
         const t = await sequelize.transaction();
         try {
+            if (error) throw new Error(error.details[0].message);
             const blog = await Blogs.findOne({
                 where: {
                     id: req.params.id,

@@ -13,11 +13,11 @@ const TagController = {
             const tags = await Tags.findAll({});
             const response = dataMapResponse(tags, [
                 "id",
-                "name",
+                "title",
                 "slug",
                 "image",
                 "describe",
-                "interested",
+                "follow",
                 "parent_id",
             ]);
             return res.send(responseSuccess("", response));
