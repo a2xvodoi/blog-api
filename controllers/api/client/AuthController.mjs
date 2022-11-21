@@ -8,8 +8,8 @@ import {
     responseFailure,
     responseSuccess,
     dataResponse,
-} from "../../../classes/response";
-import { objectClean } from "../../../classes/helpers";
+} from "../../../classes/response.mjs";
+import { objectClean } from "../../../classes/helpers.mjs";
 
 const AuthController = {
     check(req, res) {
