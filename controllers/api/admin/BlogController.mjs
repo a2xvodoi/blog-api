@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import { Blogs, BlogTag, Tags } from "../../../models/index.mjs";
-import { blogValidator } from "../../../validations/blog";
+import { blogValidator } from "../../../validations/blog.mjs";
 import { responseFailure, responseSuccess } from "../../../classes/response.mjs";
 import slugify from "../../../classes/slugify.mjs";
 import { sequelize } from "../../../config/db.mjs";
