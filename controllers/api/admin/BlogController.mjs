@@ -1,11 +1,11 @@
 import { Op } from "sequelize";
-import { Blogs, BlogTag, Tags } from "../../../models";
+import { Blogs, BlogTag, Tags } from "../../../models/index.mjs";
 import { blogValidator } from "../../../validations/blog";
-import { responseFailure, responseSuccess } from "../../../classes/response";
-import slugify from "../../../classes/slugify";
-import { sequelize } from "../../../config/db";
-import { base64Decode, unlink } from "../../../classes/helpers";
-import logger from "../../../logs/winston";
+import { responseFailure, responseSuccess } from "../../../classes/response.mjs";
+import slugify from "../../../classes/slugify.mjs";
+import { sequelize } from "../../../config/db.mjs";
+import { base64Decode, unlink } from "../../../classes/helpers.mjs";
+import logger from "../../../logs/winston.mjs";
 
 const BlogController = {
     async show(req, res) {

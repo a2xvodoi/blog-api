@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "app.js",
   "scripts": {
-    "start": "node --es-module-specifier-resolution=node --trace-warnings app.js",
-    "dev": "nodemon --experimental-modules --experimental-json-modules --es-module-specifier-resolution=node --trace-warnings --inspect app.js"
+    "start": "node --es-module-specifier-resolution=node --trace-warnings app.mjs",
+    "dev": "nodemon --experimental-modules --experimental-json-modules --es-module-specifier-resolution=node --trace-warnings --inspect app.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

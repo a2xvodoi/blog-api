@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
-import { sequelize } from "../config/db";
-import fieldsBlogTag from "./blog_tag";
-import fieldsBlog from "./blogs";
-import fieldsComment from "./comments";
-import fieldsTag from "./tags";
-import fieldsUser from "./users";
+import { sequelize } from "../config/db.mjs";
+import fieldsBlogTag from "./blog_tag.mjs";
+import fieldsBlog from "./blogs.mjs";
+import fieldsComment from "./comments.mjs";
+import fieldsTag from "./tags.mjs";
+import fieldsUser from "./users.mjs";
 
 sequelize
     .authenticate()

@@ -1,4 +1,4 @@
-import constants from "../config/constants";
+import constants from "../config/constants.mjs";
 
 function response(code, msg = "", data = {}) {
     return {
