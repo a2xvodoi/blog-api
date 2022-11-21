@@ -4,20 +4,10 @@ import { blogValidator } from "../../../validations/blog";
 import { responseFailure, responseSuccess } from "../../../classes/response";
 import slugify from "../../../classes/slugify";
 import { sequelize } from "../../../config/db";
+import { base64Decode, unlink } from "../../../classes/helpers";
+import logger from "../../../logs/winston";
 
 const BlogController = {
-    async list(req, res) {
-        try {
-            const blogs = await Blogs.findAll({
-                include: {
-                    model: Tags,
-                },
-            });
-            return res.send(responseSuccess("", blogs));
-        } catch (error) {
-            return res.send(responseFailure("", { errors: error.message }));
-        }
-    },
     async show(req, res) {
         try {
             const blog = await Blogs.findOne({
@@ -30,12 +20,13 @@ const BlogController = {
             });
             return res.send(responseSuccess("", blog));
         } catch (err) {
+            logger.error(err);
             return res.send(responseFailure("", { errors: err.message }));
         }
     },
     async store(req, res) {
         const { error } = blogValidator(req.body);
-        
+
         const t = await sequelize.transaction();
         try {
             if (error) throw new Error(error.details[0].message);
@@ -46,19 +37,23 @@ const BlogController = {
             });
 
             if (existBlog) throw new Error("Title field already exists!");
-            const blog = await Blogs.create(
-                {
-                    title: req.body.title,
-                    slug: slugify(req.body.title),
-                    summary: req.body.summary,
-                    content: req.body.content,
-                    parent_id: req.body.parent_id,
-                    published: req.body.published,
-                    author_id: 1,
-                    published_at: req.body.published ? new Date() : null,
-                },
-                { transaction: t }
-            );
+            let data = {
+                title: req.body.title,
+                slug: slugify(req.body.title),
+                summary: req.body.summary,
+                content: req.body.content,
+                parent_id: req.body.parent_id,
+                published: req.body.published,
+                author_id: 1,
+                published_at: req.body.published ? new Date() : null,
+            };
+
+            if (req.body.image) {
+                const image = base64Decode(req.body.image);
+                data = { ...data, image: image };
+            }
+
+            const blog = await Blogs.create(data, { transaction: t });
 
             const tags = req.body.tags.split(", ");
             for (let index = 0; index < tags.length; index++) {
@@ -79,13 +74,14 @@ const BlogController = {
 
             return res.send(responseSuccess("", blog));
         } catch (err) {
+            logger.error(err);
             await t.rollback();
             return res.send(responseFailure("", { errors: err.message }));
         }
     },
     async update(req, res) {
         const { error } = blogValidator(req.body);
-        
+
         const t = await sequelize.transaction();
         try {
             if (error) throw new Error(error.details[0].message);
@@ -99,10 +95,30 @@ const BlogController = {
                 throw new Error("Blog not found!");
             }
 
-            blog.title = req.body.title;
-            blog.slug = slugify(req.body.title);
+            if (blog.title !== req.body.title) {
+                blog.title = req.body.title;
+                blog.slug = slugify(req.body.title);
+            }
             blog.describe = req.body.describe;
+            blog.content = req.body.content;
             blog.parent_id = req.body.parent_id;
+            blog.published = req.body.published;
+
+            if (!req.body.published) {
+                blog.published_at = null;
+            } else {
+                if (!blog.published_at) {
+                    blog.published_at = new Date();
+                }
+            }
+
+            if (req.body.image && req.body.image !== blog.image) {
+                unlink(blog.image);
+                const image = base64Decode(req.body.image);
+                blog.image = image;
+            }
+
+            blog.save({ transaction: t });
 
             const tags = req.body.tags.split(", ");
             for (let index = 0; index < tags.length; index++) {
@@ -131,6 +147,7 @@ const BlogController = {
             await t.commit();
             res.send(responseSuccess("", blog));
         } catch (err) {
+            logger.error(err);
             await t.rollback();
             return res.send(responseFailure("", { errors: err.message }));
         }
@@ -150,6 +167,7 @@ const BlogController = {
             await blog.destroy();
             res.send(responseSuccess("Delete blog success!"));
         } catch (error) {
+            logger.error(error);
             return res.send(responseFailure("", { errors: error.message }));
         }
     },
@@ -169,6 +187,7 @@ const BlogController = {
             await blog.restore();
             res.send(responseSuccess("Restore blog success!"));
         } catch (error) {
+            logger.error(error);
             return res.send(responseFailure("", { errors: error.message }));
         }
     },

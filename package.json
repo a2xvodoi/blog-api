@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "app.js",
   "scripts": {
-    "start": "node --es-module-specifier-resolution=node app.js",
-    "dev": "nodemon --experimental-modules --experimental-json-modules --es-module-specifier-resolution=node --inspect app.js"
+    "start": "node --es-module-specifier-resolution=node --trace-warnings app.js",
+    "dev": "nodemon --experimental-modules --experimental-json-modules --es-module-specifier-resolution=node --trace-warnings --inspect app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,7 +22,9 @@
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.25.3",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",

@@ -41,7 +41,21 @@ export default {
     address: {
         type: Sequelize.STRING,
     },
+    birthday: {
+        type: Sequelize.DATE
+    },
     describe: {
+        type: Sequelize.STRING,
+    },
+    permissions: {
+        type: Sequelize.SMALLINT,
+        defaultValue: 0,
+    },
+    status: {
+        type: Sequelize.SMALLINT,
+        defaultValue: 1,
+    },
+    job: {
         type: Sequelize.STRING,
     },
     token: {

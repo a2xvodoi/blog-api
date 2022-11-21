@@ -34,6 +34,9 @@ module.exports = {
             gender: {
                 type: Sequelize.STRING,
             },
+            birthday: {
+                type: Sequelize.DATE
+            },
             avatar: {
                 type: Sequelize.STRING,
             },
@@ -53,8 +56,19 @@ module.exports = {
             zalo_id: {
                 type: Sequelize.STRING,
             },
+            job: {
+                type: Sequelize.STRING,
+            },
             describe: {
                 type: Sequelize.STRING,
+            },
+            permissions: {
+                type: Sequelize.SMALLINT,
+                defaultValue: 0,
+            },
+            status: {
+                type: Sequelize.SMALLINT,
+                defaultValue: 1,
             },
             token: {
                 type: Sequelize.STRING,

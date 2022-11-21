@@ -5,6 +5,7 @@ import {
     responseSuccess,
 } from "../../../classes/response";
 import constants from "../../../config/constants";
+import logger from "../../../logs/winston";
 
 const TagController = {
     async list(req, res) {
@@ -21,7 +22,8 @@ const TagController = {
             ]);
             return res.send(responseSuccess("", response));
         } catch (error) {
-            return res.send(responseFailure("", error));
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
         }
     },
     async show(req, res) {
@@ -39,7 +41,8 @@ const TagController = {
             });
             return res.send(responseSuccess("", blogs));
         } catch (error) {
-            return res.send(responseFailure("", error));
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
         }
     },
 };

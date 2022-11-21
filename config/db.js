@@ -16,23 +16,23 @@ const useENV = {
 };
 
 // if (process.env.host) {
-    // var options = {
-    //     database: useENV.database,
-    //     username: useENV.username,
-    //     password: useENV.password,
-    //     ...useENV,
-    // };
+    var options = {
+        database: useENV.database,
+        username: useENV.username,
+        password: useENV.password,
+        ...useENV,
+    };
 // }
 // else {
-    const env = process.env.NODE_ENV || "development";
-    const configJson = await import("./json/config.json");
-    const config = configJson.default[env];
-    var options = {
-        database: config.database,
-        username: config.username,
-        password: config.password,
-        ...config,
-    };
+    // const env = process.env.NODE_ENV || "development";
+    // const configJson = await import("./json/config.json");
+    // const config = configJson.default[env];
+    // var options = {
+    //     database: config.database,
+    //     username: config.username,
+    //     password: config.password,
+    //     ...config,
+    // };
 // }
 export const sequelize = new Sequelize(
     options.database,

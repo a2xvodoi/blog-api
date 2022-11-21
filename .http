@@ -16,8 +16,8 @@ POST  http://localhost:3000/api/login
 content-type: application/json
 
 {
-    "email": "eve.holt@reqres.in",
-    "password": "cityslicka"
+    "email": "vietnguyen2x@gmail.com",
+    "password": "123456"
 }
 
 ### User list
@@ -25,7 +25,7 @@ GET  http://localhost:3000/api/users
 content-type: application/json
 
 {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o"
+    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o"
 }
 
 
@@ -34,7 +34,7 @@ POST  http://localhost:3000/api/users
 content-type: application/json
 
 {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
+    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
     "user_name": "eve.in",
     "email": "eve.holt@reqres.in",
     "password": "cityslicka"
@@ -45,7 +45,7 @@ PUT  http://localhost:3000/api/users/1
 content-type: application/json
 
 {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
+    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
     "user_name": "eve.in",
     "email": "eve.holt@reqres.in",
     "password": "cityslicka"
@@ -57,7 +57,7 @@ DELETE  http://localhost:3000/api/users/1
 content-type: application/json
 
 {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
+    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJZU2o3Zjl1X3AiLCJpYXQiOjE2NjY3NzM5NTEsImV4cCI6MTY2Njg2MDM1MX0._k1nYJ8R1J6uB2DHPAhocAE9a36_VwYDNBN2DBW4O6o",
     "user_name": "eve.in",
     "email": "eve.holt@reqres.in",
     "password": "cityslicka"

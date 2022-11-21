@@ -6,6 +6,7 @@ import {
     responseSuccess,
 } from "../../../classes/response";
 import constants from "../../../config/constants";
+import logger from "../../../logs/winston";
 
 const BlogController = {
     async show(req, res) {
@@ -19,6 +20,9 @@ const BlogController = {
                     model: Tags,
                 },
             });
+            if (!blog) {
+                return res.send(responseSuccess("", {}));
+            }
             await blog.increment("viewed");
             await blog.reload();
             const response = {
@@ -47,7 +51,40 @@ const BlogController = {
             };
             return res.send(responseSuccess("", response));
         } catch (error) {
-            return res.send(responseFailure("", error));
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
+        }
+    },
+    async latest(req, res) {
+        try {
+            const blogs = await Blogs.findAll({
+                attributes: ["id", "title", "slug", "image", "published_at"],
+                where: {
+                    published: constants.PUBLISHED,
+                },
+                order: [["published_at", "DESC"]],
+                limit: 3,
+            });
+            return res.send(responseSuccess("", blogs));
+        } catch (error) {
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
+        }
+    },
+    async list(req, res) {
+        try {
+            const blogs = await Blogs.findAll({
+                where: {
+                    published: constants.PUBLISHED,
+                },
+                include: {
+                    model: Tags,
+                },
+            });
+            return res.send(responseSuccess("", blogs));
+        } catch (error) {
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
         }
     },
 };

@@ -10,7 +10,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             title: {
-                type: Sequelize.STRING(50),
+                type: Sequelize.STRING(100),
                 allowNull: false,
                 unique: true,
             },
@@ -23,7 +23,7 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             describe: {
-                type: Sequelize.STRING(100),
+                type: Sequelize.STRING,
             },
             follow: {
                 type: Sequelize.INTEGER,
