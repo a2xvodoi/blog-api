@@ -1,8 +1,8 @@
 import express from "express";
-import AuthController from "../../../controllers/api/client/AuthController";
-import TagController from "../../../controllers/api/client/TagController";
-import BlogController from "../../../controllers/api/client/BlogController";
-import { requireLogin } from "../../../middlewares/auth";
+import AuthController from "../../../controllers/api/client/AuthController.mjs";
+import TagController from "../../../controllers/api/client/TagController.mjs";
+import BlogController from "../../../controllers/api/client/BlogController.mjs";
+import { requireLogin } from "../../../middlewares/auth.mjs";
 
 const router = express.Router();
 

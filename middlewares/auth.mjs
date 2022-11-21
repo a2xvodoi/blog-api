@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import { Users } from "../models";
-import { responseFailure } from "../classes/response";
-import logger from "../logs/winston";
+import { Users } from "../models/index.mjs";
+import { responseFailure } from "../classes/response.mjs";
+import logger from "../logs/winston.mjs";
 
 export async function requireLogin(req, res, next) {
     const accessToken = req.header("x-access-token");

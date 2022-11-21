@@ -1,8 +1,8 @@
 import express from "express";
-import BlogController from "../../../controllers/api/admin/BlogController";
-import TagController from "../../../controllers/api/admin/TagController";
-import { roles } from "../../../middlewares/auth";
-import { ROLE } from "../../../classes/constants";
+import BlogController from "../../../controllers/api/admin/BlogController.mjs";
+import TagController from "../../../controllers/api/admin/TagController.mjs";
+import { roles } from "../../../middlewares/auth.mjs";
+import { ROLE } from "../../../classes/constants.mjs";
 
 const router = express.Router();
 

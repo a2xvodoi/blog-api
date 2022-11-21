@@ -1,12 +1,12 @@
-import { Tags, Blogs } from "../../../models";
+import { Tags, Blogs } from "../../../models/index.mjs";
 import {
     dataMapResponse,
     dataResponse,
     responseFailure,
     responseSuccess,
-} from "../../../classes/response";
-import constants from "../../../config/constants";
-import logger from "../../../logs/winston";
+} from "../../../classes/response.mjs";
+import constants from "../../../config/constants.mjs";
+import logger from "../../../logs/winston.mjs";
 
 const BlogController = {
     async show(req, res) {

@@ -1,9 +1,9 @@
-import { Tags } from "../../../models";
-import { tagValidator } from "../../../validations/tag";
-import { responseFailure, responseSuccess } from "../../../classes/response";
-import slugify from "../../../classes/slugify";
-import { base64Decode } from "../../../classes/helpers";
-import logger from "../../../logs/winston";
+import { Tags } from "../../../models/index.mjs";
+import { tagValidator } from "../../../validations/tag.mjs";
+import { responseFailure, responseSuccess } from "../../../classes/response.mjs";
+import slugify from "../../../classes/slugify.mjs";
+import { base64Decode } from "../../../classes/helpers.mjs";
+import logger from "../../../logs/winston.mjs";
 
 const TagController = {
     async show(req, res) {

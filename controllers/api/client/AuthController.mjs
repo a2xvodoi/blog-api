@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 import bcrypt from "bcryptjs";
-import { Users } from "../../../models";
-import logger from "../../../logs/winston";
-import { loginValidator, registerValidator } from "../../../validations/auth";
+import { Users } from "../../../models/index.mjs";
+import logger from "../../../logs/winston.mjs";
+import { loginValidator, registerValidator } from "../../../validations/auth.mjs";
 import {
     responseFailure,
     responseSuccess,
