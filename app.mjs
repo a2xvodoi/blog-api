@@ -6,9 +6,9 @@ import { fileURLToPath } from "url";
 import cors from "cors";
 import "dotenv/config";
 
-import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
-import apiRouter from "./routes/api";
+import indexRouter from "./routes/index.mjs";
+import usersRouter from "./routes/users.mjs";
+import apiRouter from "./routes/api/index.mjs";
 
 const app = express();
 const port = process.env.PORT || "3000";
