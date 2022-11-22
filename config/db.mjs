@@ -1,4 +1,7 @@
 import Sequelize from "sequelize";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
 
 const useENV = {
     database: process.env.DATABASE_NAME,
@@ -15,25 +18,25 @@ const useENV = {
     },
 };
 
-// if (process.env.host) {
+if (process.env.DATABASE_HOST) {
     var options = {
         database: useENV.database,
         username: useENV.username,
         password: useENV.password,
         ...useENV,
     };
-// }
-// else {
-    // const env = process.env.NODE_ENV || "development";
-    // const configJson = await import("./json/config.json");
-    // const config = configJson.default[env];
-    // var options = {
-    //     database: config.database,
-    //     username: config.username,
-    //     password: config.password,
-    //     ...config,
-    // };
-// }
+}
+else {
+    const env = process.env.NODE_ENV || "development";
+    const configJson = require("./json/config.json");
+    const config = configJson[env];
+    var options = {
+        database: config.database,
+        username: config.username,
+        password: config.password,
+        ...config,
+    };
+}
 export const sequelize = new Sequelize(
     options.database,
     options.username,
