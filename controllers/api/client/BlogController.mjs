@@ -1,4 +1,4 @@
-import { Tags, Blogs } from "../../../models/index.mjs";
+import { Tags, Blogs, Users } from "../../../models/index.mjs";
 import {
     dataMapResponse,
     dataResponse,
@@ -82,6 +82,34 @@ const BlogController = {
                 },
             });
             return res.send(responseSuccess("", blogs));
+        } catch (error) {
+            logger.error(error);
+            return res.send(responseFailure("", { errors: error.message }));
+        }
+    },
+    async getAuthor(req, res) {
+        try {
+            const blog = await Blogs.findOne({
+                where: {
+                    published: constants.PUBLISHED,
+                    slug: req.params.slug,
+                },
+            });
+            if (!blog) {
+                throw new Error("Blog not found!");
+            }
+            const user = await Users.findOne({
+                attributes: ["id", "first_name", "last_name", "describe", "job"],
+                where: {
+                    id: blog.author_id,
+                },
+            });
+
+            if (!user) {
+                throw new Error("User not found!");
+            }
+
+            return res.send(responseSuccess("", user));
         } catch (error) {
             logger.error(error);
             return res.send(responseFailure("", { errors: error.message }));

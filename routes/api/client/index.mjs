@@ -25,4 +25,5 @@ router.get("/tags/:slug", TagController.show);
 router.get("/blogs", BlogController.list);
 router.get("/blogs/latest", BlogController.latest);
 router.get("/blogs/:slug", BlogController.show);
+router.get("/blogs/:slug/author", BlogController.getAuthor);
 export default router;
