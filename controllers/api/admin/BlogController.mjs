@@ -43,8 +43,8 @@ const BlogController = {
                 summary: req.body.summary,
                 content: req.body.content,
                 parent_id: req.body.parent_id,
-                published: req.body.published,
-                author_id: 1,
+                published: req.body.published ? 1 : 0,
+                author_id: req.userInfo.id,
                 published_at: req.body.published ? new Date() : null,
             };
 
@@ -102,7 +102,7 @@ const BlogController = {
             blog.describe = req.body.describe;
             blog.content = req.body.content;
             blog.parent_id = req.body.parent_id;
-            blog.published = req.body.published;
+            blog.published = req.body.published  ? 1 : 0;
 
             if (!req.body.published) {
                 blog.published_at = null;

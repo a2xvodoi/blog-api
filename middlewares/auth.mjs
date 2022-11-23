@@ -18,7 +18,7 @@ export async function requireLogin(req, res, next) {
             if (!user) {
                 throw new Error("x-access-token is incorrect!");
             }
-            req.permissions = user.permissions;
+            req.userInfo = user;
             return next();
         }
         throw new Error("x-access-token is required!");
@@ -30,7 +30,7 @@ export async function requireLogin(req, res, next) {
 
 export function roles(roles) {
     return function (req, res, next) {
-        if (!roles.includes(req.permissions)) {
+        if (!roles.includes(req.userInfo.permissions)) {
             const error = "Permission not allowed!";
             logger.error(error);
             return res.send(responseFailure("", { errors: error }));

@@ -5,6 +5,7 @@ import logger from "morgan";
 import { fileURLToPath } from "url";
 import cors from "cors";
 import "dotenv/config";
+import session from 'express-session';
 
 import indexRouter from "./routes/index.mjs";
 import usersRouter from "./routes/users.mjs";
@@ -19,6 +20,12 @@ app.use(logger("dev"));
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(cookieParser());
+app.use(session({
+    secret: process.env.TOKEN_SECRET,
+    cookie: { maxAge: 3600000 * 2 }, // 2 hours
+    resave: false,
+    saveUninitialized: true,
+  }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
